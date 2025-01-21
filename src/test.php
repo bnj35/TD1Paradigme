@@ -70,4 +70,24 @@ if ($tableExists) {
     echo "La table 'article' n'existe pas.\n";
 }
 
+//Test de la méthode belongs_to() de la classe Article
+$article = \iutnc\hellokant\model\Article::first(64);
+if ($article) {
+    $categorie = $article->belongs_to('Categorie', 'id_categ');
+    echo $categorie->nom . "\n"; // Affiche le nom de la catégorie
+} else {
+    echo "Article not found.\n";
+}
+
+//Test de la méthode has_many() de la classe Categorie
+$categorie = \iutnc\hellokant\model\Categorie::first(1);
+if ($categorie) {
+    $articles = $categorie->has_many('Article', 'id_categ');
+    foreach ($articles as $article) {
+        echo $article->nom . "\n";
+    }
+} else {
+    echo "Categorie not found.\n";
+}
+
   ////// fonctionne jusqu'ici /////////
